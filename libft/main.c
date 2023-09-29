@@ -6,7 +6,7 @@
 /*   By: niwasaki <niwasaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:13:55 by niwasaki          #+#    #+#             */
-/*   Updated: 2023/09/28 23:07:56 by niwasaki         ###   ########.fr       */
+/*   Updated: 2023/09/29 15:57:38 by niwasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -688,6 +688,9 @@ void	test_striteri(void)
 	char	test[] = "123 abc DEF ;:_+-~\a";
 
 	printf("[ft_striteri]	  : ");
+	put_result(ft_striteri(NULL, NULL) == NULL, 1, 0);
+	put_result(ft_striteri("test", NULL) == NULL, 2, 0);
+	put_result(ft_striteri(NULL, test_f2) == NULL, 3, 0);
 	ft_striteri(emp, test_f2);
 	put_result(strcmp(emp, "") == 0, 1, 0);
 	ft_striteri(test, test_f2);
