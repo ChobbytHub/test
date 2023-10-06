@@ -6,7 +6,7 @@
 /*   By: niwasaki <niwasaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:13:55 by niwasaki          #+#    #+#             */
-/*   Updated: 2023/10/01 15:37:54 by niwasaki         ###   ########.fr       */
+/*   Updated: 2023/10/06 12:46:08 by niwasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,22 +419,22 @@ void	test_calloc(void)
 
 	printf("[ft_calloc]	  : ");
 	put_result(ft_calloc(SIZE_MAX, SIZE_MAX) == calloc(SIZE_MAX, SIZE_MAX), 1, 0);
-	test = calloc(0, 0);
+	test = ft_calloc(0, 0);
 	std = calloc(0, 0);
 	put_result(memcmp(test, std, 10) == 0, 2, 0);
 	free(test);
 	free(std);
-	test = calloc(0, 1);
+	test = ft_calloc(0, 1);
 	std = calloc(0, 1);
 	put_result(memcmp(test, std, 10) == 0, 3, 0);
 	free(test);
 	free(std);
-	test = calloc(1, 0);
+	test = ft_calloc(1, 0);
 	std = calloc(1, 0);
 	put_result(memcmp(test, std, 10) == 0, 4, 0);
 	free(test);
 	free(std);
-	test = calloc(5, 2);
+	test = ft_calloc(5, 2);
 	std = calloc(5, 2);
 	put_result(memcmp(test, std, 10) == 0, 5, 1);
 	free(test);
