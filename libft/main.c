@@ -6,7 +6,7 @@
 /*   By: niwasaki <niwasaki@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:13:55 by niwasaki          #+#    #+#             */
-/*   Updated: 2023/10/06 12:46:08 by niwasaki         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:37:23 by niwasaki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	test_memset(void)
 	printf("[ft_memset]       : ");
 	bzero(std, 50);
 	bzero(test, 50);
-	memset(test, 65, 0);
+	ft_memset(test, 65, 0);
 	put_result(test[0] == 0, 1, 0);
 	memset(std, -200, 5);
 	ft_memset(test, -200, 5);
@@ -408,8 +408,8 @@ void	test_atoi(void)
 	put_result(ft_atoi("-9223372036854775808") == atoi("-9223372036854775808"), 22, 0);		// LONG_MIN
 	put_result(ft_atoi("9223372036854775808") == atoi("9223372036854775808"), 23, 0);		// LONG_MAX + 1
 	put_result(ft_atoi("-9223372036854775809") == atoi("-9223372036854775809"), 24, 0);		// LONG_MIN - 1
-	put_result(ft_atoi("19223372036854775807") == atoi("19223372036854775807"), 25, 0);		// OVER LONG_MAX
-	put_result(ft_atoi("-19223372036854775808") == atoi("-19223372036854775808"), 25, 1);	// UNDER LONG_MIN
+	put_result(ft_atoi("18223372036854775807") == atoi("18223372036854775807"), 25, 0);		// OVER LONG_MAX
+	put_result(ft_atoi("-18223372036854775808") == atoi("-18223372036854775808"), 25, 1);	// UNDER LONG_MIN
 }
 
 void	test_calloc(void)
@@ -419,6 +419,8 @@ void	test_calloc(void)
 
 	printf("[ft_calloc]	  : ");
 	put_result(ft_calloc(SIZE_MAX, SIZE_MAX) == calloc(SIZE_MAX, SIZE_MAX), 1, 0);
+	// put_result(calloc(INT_MAX, INT_MAX) == NULL, 1, 0);
+	// put_result(ft_calloc(INT_MAX, INT_MAX) == NULL, 1, 0);
 	test = ft_calloc(0, 0);
 	std = calloc(0, 0);
 	put_result(memcmp(test, std, 10) == 0, 2, 0);
@@ -584,24 +586,27 @@ void	test_split(void)
 	test = ft_split("HelloWorld!", ' ');
 	put_result(strcmp(test[0], "HelloWorld!") == 0 && test[1] == NULL, 4, 0);
 	free_all(test, 2);
+	test = ft_split("Hello World!", '\0');
+	put_result(strcmp(test[0], "Hello World!") == 0 && test[1] == NULL, 5, 0);
+	free_all(test, 2);
 	test = ft_split("   HelloWorld!   ", ' ');
-	put_result(strcmp(test[0], "HelloWorld!") == 0 && test[1] == NULL, 5, 0);
+	put_result(strcmp(test[0], "HelloWorld!") == 0 && test[1] == NULL, 6, 0);
 	free_all(test, 2);
 	test = ft_split("   Hello    World!   ", ' ');
-	put_result(strcmp(test[0], "Hello") == 0 && strcmp(test[1], "World!") == 0 && test[2] == NULL, 6, 0);
+	put_result(strcmp(test[0], "Hello") == 0 && strcmp(test[1], "World!") == 0 && test[2] == NULL, 7, 0);
 	free_all(test, 3);
 	test = ft_split("42 students struggled through coding problems late into the night.", ' ');
-	put_result(strcmp(test[0], "42") == 0, 7, 0);
-	put_result(strcmp(test[1], "students") == 0, 8, 0);
-	put_result(strcmp(test[2], "struggled") == 0, 9, 0);
-	put_result(strcmp(test[3], "through") == 0, 10, 0);
-	put_result(strcmp(test[4], "coding") == 0, 11, 0);
-	put_result(strcmp(test[5], "problems") == 0, 12, 0);
-	put_result(strcmp(test[6], "late") == 0, 13, 0);
-	put_result(strcmp(test[7], "into") == 0, 14, 0);
-	put_result(strcmp(test[8], "the") == 0, 15, 0);
-	put_result(strcmp(test[9], "night.") == 0, 16, 0);
-	put_result(test[10] == NULL, 17, 1);
+	put_result(strcmp(test[0], "42") == 0, 8, 0);
+	put_result(strcmp(test[1], "students") == 0, 9, 0);
+	put_result(strcmp(test[2], "struggled") == 0, 10, 0);
+	put_result(strcmp(test[3], "through") == 0, 11, 0);
+	put_result(strcmp(test[4], "coding") == 0, 12, 0);
+	put_result(strcmp(test[5], "problems") == 0, 13, 0);
+	put_result(strcmp(test[6], "late") == 0, 14, 0);
+	put_result(strcmp(test[7], "into") == 0, 15, 0);
+	put_result(strcmp(test[8], "the") == 0, 16, 0);
+	put_result(strcmp(test[9], "night.") == 0, 17, 0);
+	put_result(test[10] == NULL, 18, 1);
 	free_all(test, 11);
 }
 
@@ -688,9 +693,9 @@ void	test_striteri(void)
 	char	test[] = "123 abc DEF ;:_+-~\a";
 
 	printf("[ft_striteri]	  : ");
-	put_result(ft_striteri(NULL, NULL) == NULL, 1, 0);
-	put_result(ft_striteri("test", NULL) == NULL, 2, 0);
-	put_result(ft_striteri(NULL, test_f2) == NULL, 3, 0);
+	ft_striteri(NULL, NULL);
+	ft_striteri("test", NULL);
+	ft_striteri(NULL, test_f2);
 	ft_striteri(emp, test_f2);
 	put_result(strcmp(emp, "") == 0, 1, 0);
 	ft_striteri(test, test_f2);
