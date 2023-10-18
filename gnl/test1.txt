@@ -1,0 +1,8 @@
+get next line test1
+Hello world!
+01234567890123456789012345678901234567890123456789
+
+
+42 Tokyo
+
+last line
